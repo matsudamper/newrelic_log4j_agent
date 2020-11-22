@@ -1,0 +1,35 @@
+plugins {
+    id 'java'
+    id 'org.jetbrains.kotlin.jvm' version '1.4.10'
+}
+
+group 'net.matsudamper.newrelic_log4j_agent'
+version '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+sourceSets {
+    main {
+        resources {
+            srcDir 'log'
+        }
+    }
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib"
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    implementation("com.google.guava:guava:30.0-jre")
+    implementation("org.apache.logging.log4j:log4j-core:2.14.0")
+
+}
+
+jar {
+    manifest {
+        attributes 'Premain-Class': 'net.matsudamper.newrelic_log4j_agent.Premain'
+    }
+
+    from { configurations.compileClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
+}

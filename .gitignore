@@ -1,0 +1,7 @@
+.gradle
+build
+
+.idea/*
+!.idea/codeStyles/
+
+newrelic_tmp
